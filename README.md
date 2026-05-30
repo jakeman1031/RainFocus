@@ -17,18 +17,18 @@ npm run dev
 
 Open <http://localhost:3000>.
 
-## View the production build (no build step needed)
+## View the production build
 
-The delivered `build/` folder is a static export with `index.html` at its root.
+The build is a static export with `index.html` at its root.
 
-- **Quickest:** open `build/index.html` directly in your browser. Asset paths are relativized during the build, so the page renders from `file://`.
-- **Full interactivity** (mobile nav toggle, the design-system Copy buttons): serve the folder over HTTP — module scripts don't execute from `file://`:
+- **From the delivery zip:** open `build/index.html` directly in your browser. The build inside the zip has relativized asset paths, so it renders from `file://`. (JavaScript interactivity — the mobile nav toggle, the design-system Copy buttons — doesn't run under `file://`; the layout is fully styled.)
+- **Locally with full interactivity:** serve the build over HTTP:
   ```bash
   npm run serve:build      # serves /build at http://localhost:4173
   ```
   …or just use the live sandbox link above.
 
-To regenerate it yourself: `npm run build` (runs `next build` and a postbuild step that moves `out/ → build/` and relativizes asset paths).
+To regenerate the build: `npm run build` (`next build` + a postbuild step that moves `out/ → build/`).
 
 ## Build & package for delivery
 

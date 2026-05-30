@@ -1,17 +1,19 @@
 // After `next build` with `output: 'export'`, Next.js writes the static site
 // to /out. The RainFocus brief asks for a /build folder containing index.html,
-// so this script moves /out → /build (replacing any previous /build), then
-// rewrites absolute asset paths to relative ones so build/index.html can be
-// opened directly from the filesystem (file://) and still find its CSS, fonts,
-// and images.
+// so this script moves /out → /build (replacing any previous /build).
+//
+// Asset paths are left ABSOLUTE here — that's what works when the site is
+// served from a root (next dev, serve:build, the CodeSandbox preview), and it
+// hydrates cleanly. The delivery zip gets a separate, relativized copy so it
+// can also be opened straight from the filesystem (see scripts/package.mjs).
 //
 // Cross-platform via node:fs/promises. On Windows a plain directory rename can
 // fail with EPERM/EBUSY when a file watcher (e.g. a running `next dev`) or the
 // indexer holds a handle, so we fall back to copy + remove.
 
-import { rm, rename, access, cp, readdir, readFile, writeFile } from 'node:fs/promises';
+import { rm, rename, access, cp } from 'node:fs/promises';
 import { constants } from 'node:fs';
-import { resolve, relative, dirname, join, sep } from 'node:path';
+import { resolve } from 'node:path';
 
 const root = process.cwd();
 const outDir = resolve(root, 'out');
@@ -23,51 +25,6 @@ async function exists(p) {
     return true;
   } catch {
     return false;
-  }
-}
-
-async function walk(dir) {
-  const entries = await readdir(dir, { withFileTypes: true });
-  const files = [];
-  for (const entry of entries) {
-    const full = join(dir, entry.name);
-    if (entry.isDirectory()) files.push(...(await walk(full)));
-    else files.push(full);
-  }
-  return files;
-}
-
-// `./` for files at the build root, `../` per directory level deeper.
-function prefixFor(fileAbs) {
-  const relDir = relative(buildDir, dirname(fileAbs));
-  const depth = relDir === '' ? 0 : relDir.split(sep).length;
-  return depth === 0 ? './' : '../'.repeat(depth);
-}
-
-// Make _next / public asset references relative so the page renders from file://.
-// Only touches href="" / src="" attributes and CSS url() — NOT inline-script
-// chunk maps, which must stay root-absolute so the served build keeps working.
-async function relativizeAssets() {
-  const files = await walk(buildDir);
-  const htmlAttr = /\b(href|src)=(["'])\/(_next\/|icons\/|images\/)/g;
-  const cssUrl = /url\((['"]?)\/(_next\/)/g;
-
-  for (const file of files) {
-    const isHtml = file.endsWith('.html');
-    const isCss = file.endsWith('.css');
-    if (!isHtml && !isCss) continue;
-
-    const prefix = prefixFor(file);
-    const original = await readFile(file, 'utf8');
-    let updated = original;
-
-    if (isHtml) {
-      updated = updated.replace(htmlAttr, (_m, attr, quote, dir) => `${attr}=${quote}${prefix}${dir}`);
-    } else {
-      updated = updated.replace(cssUrl, (_m, quote, dir) => `url(${quote}${prefix}${dir}`);
-    }
-
-    if (updated !== original) await writeFile(file, updated);
   }
 }
 
@@ -97,9 +54,7 @@ async function main() {
     }
   }
 
-  await relativizeAssets();
-
-  console.log('[postbuild] Output ready in /build (asset paths relativized for file://)');
+  console.log('[postbuild] Output ready in /build');
 }
 
 main().catch((err) => {
