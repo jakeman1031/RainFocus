@@ -1,0 +1,14 @@
+{
+  "$schema": "https://codesandbox.io/schemas/tasks.json",
+  "setupTasks": [
+    { "name": "Install dependencies", "command": "npm install" }
+  ],
+  "tasks": {
+    "sandbox": {
+      "name": "Build & serve static site",
+      "command": "npm run sandbox",
+      "runAtStart": true,
+      "preview": { "port": 3000 }
+    }
+  }
+}
