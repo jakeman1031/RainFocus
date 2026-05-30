@@ -1,0 +1,19 @@
+@use 'variables' as *;
+
+.intro {
+  padding: 0px 10px 40px 10px;
+  border-bottom: 1px solid $rf-color-border;
+}
+
+.title {
+  font-size: $rf-fs-h2; // 24px
+  font-weight: $rf-semibold;
+  color: $rf-color-text-header;
+}
+
+.desc {
+  margin-top: 12px;
+  font-size: $rf-fs-body-workflow; // 16px
+  line-height: $rf-lh-body; // 24px
+  color: $rf-color-text-body;
+}

@@ -1,0 +1,213 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.page {
+  padding: 32px 0 64px;
+  max-width: 1100px;
+}
+
+/* ---------------- Page header ---------------- */
+.pageHead {
+  margin-bottom: 8px;
+}
+
+.kicker {
+  font: $rf-bold 12px/1 $rf-font;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $rf-brand-primary;
+}
+
+.h1 {
+  margin-top: 6px;
+  font-size: var(--rf-fs-h1);
+  font-weight: $rf-light;
+  color: $rf-color-text-header;
+}
+
+.lede {
+  margin-top: 10px;
+  font-size: var(--rf-fs-body-workflow);
+  line-height: $rf-lh-body;
+  color: $rf-color-text-body;
+  max-width: 62ch;
+
+  code {
+    font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
+    font-size: 0.85em;
+    background: rgba($rf-brand-primary, 0.08);
+    color: $rf-brand-primary;
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+}
+
+/* ---------------- Section scaffolding ---------------- */
+.section {
+  margin-top: 48px;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid $rf-color-border;
+}
+
+.sectionTitle {
+  font-size: var(--rf-fs-h2);
+  font-weight: $rf-semibold;
+  color: $rf-color-text-header;
+}
+
+.sectionNote {
+  font: $rf-regular 12px/1 'SFMono-Regular', Consolas, Menlo, monospace;
+  color: $rf-color-text-g4;
+}
+
+/* ---------------- Colors ---------------- */
+.colorGroup + .colorGroup {
+  margin-top: 24px;
+}
+
+.groupLabel {
+  font-size: $rf-fs-desc;
+  font-weight: $rf-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $rf-color-text-g4;
+  margin-bottom: 12px;
+}
+
+.swatchGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+}
+
+.swatch {
+  border: 1px solid $rf-color-border;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.swatchColor {
+  height: 72px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06); // keeps #FFFFFF visible
+}
+
+.swatchMeta {
+  padding: 10px 12px;
+}
+
+.swatchName {
+  font: $rf-bold 12px/1.2 'SFMono-Regular', Consolas, Menlo, monospace;
+  color: $rf-color-text-header;
+}
+
+.swatchHex {
+  margin-top: 4px;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: $rf-color-text-g4;
+}
+
+.swatchNote {
+  margin-top: 6px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: $rf-color-text-g4;
+}
+
+/* ---------------- Typography ---------------- */
+.typeList {
+  display: flex;
+  flex-direction: column;
+}
+
+.typeRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 14px 0;
+
+  & + & {
+    border-top: 1px solid rgba($rf-color-border, 0.5);
+  }
+}
+
+.typeSample {
+  flex: 1;
+  min-width: 200px;
+  color: $rf-color-text-header;
+  line-height: 1.2;
+}
+
+.typeMeta {
+  font: $rf-semibold 11px/1.5 'SFMono-Regular', Consolas, Menlo, monospace;
+  color: $rf-color-text-g4;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ---------------- Spacing bars ---------------- */
+.spaceList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.spaceRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.spaceBar {
+  height: 20px;
+  flex-shrink: 0;
+  background: #e6e2f2;
+  border: 1px solid #d6d0e8;
+  border-radius: 3px;
+}
+
+.spaceLabel {
+  font: $rf-semibold 12px/1 'SFMono-Regular', Consolas, Menlo, monospace;
+  color: $rf-color-text-header;
+}
+
+.spaceVal {
+  font-size: 11px;
+  color: $rf-color-text-g4;
+}
+
+/* ---------------- Grid demo ---------------- */
+.gridDemo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gridCell {
+  background: #f0eef7; // light grey-purple to read sizing across the row
+  border: 1px solid #e0dcec;
+  border-radius: 4px;
+  padding: 14px 8px;
+  text-align: center;
+  font: $rf-semibold 12px/1 'SFMono-Regular', Consolas, Menlo, monospace;
+  color: $rf-color-text-g4;
+}
+
+/* ---------------- Components ---------------- */
+.componentRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}

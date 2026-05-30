@@ -1,0 +1,68 @@
+@use 'variables' as *;
+
+.megaNav {
+  margin-top: 4px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: $rf-fs-body-admin; // 14px
+  font-weight: $rf-semibold;
+  color: $rf-color-text-g4; // #767676
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: rgba($rf-brand-primary, 0.04);
+  }
+}
+
+/* The dot inherits the text color, so it turns purple automatically on the active item. */
+.dot {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.itemActive {
+  background: rgba($rf-brand-primary, 0.08);
+  color: $rf-brand-primary; // #5c00dc
+
+  &:hover {
+    background: rgba($rf-brand-primary, 0.12);
+  }
+}
+
+.subList {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 4px 12px 12px 48px; // indent to align under the parent label
+}
+
+.subItem {
+  display: block;
+  padding: 8px 0;
+  font-size: $rf-fs-body-admin; // 14px
+  font-weight: $rf-semibold;
+  color: $rf-color-text-g4;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: $rf-brand-primary;
+  }
+}

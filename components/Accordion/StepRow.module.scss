@@ -1,0 +1,24 @@
+@use 'variables' as *;
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: $rf-fs-body-admin; // 14px
+  color: $rf-color-text-g3; // #444
+}
+
+.stepNum {
+  font-weight: $rf-bold;
+  color: $rf-color-text-header; // #222
+}
+
+// Holds one or more grid rows; spaces stacked rows (e.g. Step 2's two rows).
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

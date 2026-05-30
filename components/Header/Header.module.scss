@@ -1,0 +1,74 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.header {
+  display: flex;
+  align-items: flex-start; // logo, title, and button all top-align
+  gap: 16px;
+  padding: 40px 0;
+}
+
+.logo {
+  flex-shrink: 3;
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  overflow: hidden; // the source art is wide; crop it to a square
+  @include sm {          
+    display: block;
+    width: 95px;
+    height: 95px;
+
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+
+}}
+
+.img-resp{
+    max-width: 100%;
+    height: auto;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 0; // lets the title wrap instead of overflowing on narrow screens
+}
+
+.title {
+  font-size: $rf-fs-h1; // 32px
+  font-weight: $rf-light; // 300
+  color: $rf-color-text-header;
+  line-height: 1.1;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  font-size: $rf-fs-body-workflow; // 16px
+  line-height: $rf-lh-body; // 24px
+  color: $rf-brand-primary;
+}
+
+.action {
+  flex-shrink: 0; // natural size, stays on the header row at desktop
+}
+
+/* Below 500px, drop the button onto its own line under the logo + title. */
+@media (max-width: 500px) {
+  .header {
+    flex-wrap: wrap;
+  }
+  .action {
+    flex-basis: 100%; // can't share a row → wraps to its own line
+    display: flex;
+    justify-content: flex-start; // keep the button left-aligned on its line
+  }
+}

@@ -1,0 +1,38 @@
+@use 'variables' as *;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: $rf-fs-body-admin; // 14px
+  font-weight: $rf-bold;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease, filter 0.15s ease;
+
+  &:focus-visible {
+    outline: 2px solid $rf-brand-primary;
+    outline-offset: 2px;
+  }
+}
+
+.primary {
+  background: $rf-brand-primary;
+  color: $rf-button-on-primary;
+
+  &:hover {
+    filter: brightness(1.08);
+  }
+}
+
+.secondary {
+  background: transparent;
+  color: $rf-brand-primary;
+  border: 1px solid $rf-brand-primary;
+
+  &:hover {
+    background: rgba($rf-brand-primary, 0.06);
+  }
+}

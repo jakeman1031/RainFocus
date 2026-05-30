@@ -1,0 +1,24 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.shell {
+  display: flex;
+  min-height: 100vh;
+  background: $rf-color-surface;
+
+  // At/below 992px the sidebar becomes a full-width top bar, so the shell
+  // stacks: bar on top, body below.
+  @media (max-width: 992px) {
+    flex-direction: column;
+  }
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+  padding: 0 $body-content-pad; // 48px at desktop
+
+  @media (max-width: $md) {
+    padding: 0 16px;
+  }
+}

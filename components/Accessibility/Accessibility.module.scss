@@ -1,0 +1,155 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+$pass-green: #0cce6b; // Lighthouse pass color
+$pass-green-text: #0a7c42; // readable green on white
+
+.page {
+  padding: 32px 0 64px;
+  max-width: 760px;
+}
+
+/* ---------------- Score header ---------------- */
+.scoreHead {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.gauge {
+  flex-shrink: 0;
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  border: 6px solid $pass-green;
+  background: rgba($pass-green, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.score {
+  font-size: 40px;
+  font-weight: $rf-semibold;
+  line-height: 1;
+  color: $pass-green-text;
+}
+
+.title {
+  font-size: var(--rf-fs-h1);
+  font-weight: $rf-light;
+  color: $rf-color-text-header;
+}
+
+/* ---------------- Intro ---------------- */
+.intro {
+  font-size: $rf-fs-body-admin; // 14px
+  line-height: 1.6;
+  color: $rf-color-text-body;
+  margin-bottom: 32px;
+
+  a {
+    color: $rf-brand-primary;
+    text-decoration: underline;
+  }
+}
+
+/* ---------------- Groups ---------------- */
+.group {
+  border-top: 1px solid $rf-color-border;
+  padding: 16px 0;
+}
+
+.groupHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.groupTitle {
+  font-size: $rf-fs-body-admin; // 14px
+  font-weight: $rf-semibold;
+  color: $rf-color-text-header;
+}
+
+.toggle {
+  flex-shrink: 0;
+  font-size: $rf-fs-desc; // 12px
+  font-weight: $rf-semibold;
+  color: $rf-brand-primary;
+  background: transparent;
+  border: none;
+  padding: 4px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba($rf-brand-primary, 0.06);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $rf-brand-primary;
+    outline-offset: 2px;
+  }
+}
+
+.groupBody {
+  margin-top: 16px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.manualItem,
+.passedItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: $rf-fs-body-admin; // 14px
+  line-height: 1.5;
+  color: $rf-color-text-body;
+}
+
+/* Empty round marker for "to check manually" items. */
+.manualMark {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  border: 2px solid $rf-color-text-g4;
+  border-radius: 50%;
+}
+
+/* Green check for passed audits. */
+.check {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 1px;
+  border-radius: 50%;
+  background: $pass-green;
+  color: #fff;
+  font-size: 11px;
+  line-height: 16px;
+  text-align: center;
+}
+
+.note {
+  margin-top: 20px;
+  font-size: $rf-fs-desc; // 12px
+  line-height: 1.6;
+  color: $rf-color-text-g4;
+
+  a {
+    color: $rf-brand-primary;
+    text-decoration: underline;
+  }
+}

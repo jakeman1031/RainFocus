@@ -17,8 +17,13 @@
 /.next/
 /out/
 
-# production
+# Generated at package time (`npm run package`) and shipped in the delivery zip,
+# so it does not need to live in the repo / sandbox.
 /build
+
+# Delivery artifacts
+/jake-arciniega-rf-ui
+/jake-arciniega-rf-ui.zip
 
 # misc
 .DS_Store

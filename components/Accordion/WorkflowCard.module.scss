@@ -1,0 +1,41 @@
+@use 'variables' as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: 100%; // equal-height cards across a grid row
+  padding: 20px 15px;
+  background: $rf-color-surface;
+  border: 1px solid $rf-color-border;
+  border-radius: 4px;
+  transition: box-shadow 0.15s ease;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba(57, 53, 81, 0.08);
+  }
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: $rf-fs-h5; // 13px
+  font-weight: $rf-bold;
+  color: $rf-color-text-header;
+}
+
+.desc {
+  font-size: $rf-fs-desc; // 12px
+  line-height: 1.4;
+  color: $rf-color-text-body;
+}

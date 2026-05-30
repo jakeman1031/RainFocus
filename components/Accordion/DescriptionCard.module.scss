@@ -1,0 +1,20 @@
+@use 'variables' as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+}
+
+.title {
+  font-size: $rf-fs-h5; // 13px
+  font-weight: $rf-bold;
+  color: $rf-color-text-header;
+}
+
+.desc {
+  font-size: $rf-fs-desc; // 12px
+  line-height: 1.4;
+  color: $rf-color-text-body;
+}

@@ -1,0 +1,22 @@
+// Global styles — loaded once from app/layout.jsx.
+//
+// `@use` brings in tokens, mixins, and the reset. Module-scoped SCSS files
+// (*.module.scss) should ALSO @use these when they need tokens; SCSS does not
+// share variables across files automatically.
+
+@use 'variables' as *;
+@use 'reset';
+@use 'grid';
+
+html {
+  // Use the next/font CSS variable when available; fall back to the static stack.
+  font-family: var(--rf-font-inter, #{$rf-font});
+  color: var(--rf-color-text-body);
+  background: var(--rf-color-surface);
+}
+
+body {
+  font-size: $rf-fs-body-admin;        // 14px default per Figma "Paragraph Admin"
+  font-weight: $rf-regular;
+  line-height: 1.5;
+}

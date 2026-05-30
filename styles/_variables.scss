@@ -1,0 +1,105 @@
+// =============================================================================
+// Design tokens — extracted from the Figma file via get_variable_defs on node
+// 310:89 of the "⭐️ RainFocus UI Challenge- Updated" frame.
+//
+// Both SCSS variables (for use in @include, calc, mixins) and CSS custom
+// properties (for runtime overrides / dev tools) are exposed so you can pick
+// whichever fits the consumer.
+// =============================================================================
+
+// ----- Colors ---------------------------------------------------------------
+$rf-brand-primary:        #5C00DC;   // Edit event button, active "Attendees" nav, links
+$rf-brand-pink:           #ED1A5D;   // rf logo
+$rf-brand-berry:          #E71356;   // Attendee person icon
+$rf-brand-grape-3:        #AB99FF;   // Attendee portal accent (light purple shadow)
+
+$rf-color-surface:        #FFFFFF;   // Card / sidebar background
+$rf-color-border:         #CBC6DE;   // Card borders, dividers
+
+
+// ----- Text Colors -----------------------------------------------------------
+$rf-color-text-header:    #222222;   // H1/H2/H3, bold labels
+$rf-color-text-body:      #393551;   // Body paragraphs
+$rf-color-text-g3:        #444444;   // Mid-emphasis text
+$rf-color-text-g4:        #767676;   // Low-emphasis text (Lehi, UT • date)
+
+$rf-button-on-primary:    #FFFFFF;   // Text on primary purple button
+
+// ----- Typography -----------------------------------------------------------
+$rf-font:                 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+$rf-font-h5:              'Open Sans', $rf-font;
+
+// Sizes (px values from Figma; convert to rem at usage site if preferred)
+$rf-fs-h1:                clamp(18px, calc(18px + 14 * (#{"100vw - 320px"}) / 960), 32px);   // Page Header — Light 300
+$rf-fs-h2:                clamp(16px, calc(18px + 14 * (#{"100vw - 320px"}) / 960), 24px);   // Admin Section Header — SemiBold 600
+$rf-fs-h3:                clamp(14px, calc(18px + 14 * (#{"100vw - 320px"}) / 960), 20px);   // Sub Header — SemiBold 600
+$rf-fs-body-workflow:     clamp(12px, calc(18px + 14 * (#{"100vw - 320px"}) / 960), 16px);  // Paragraph Workflow — Regular 400, lh 24
+$rf-fs-body-admin:        14px;   // Paragraph Admin — Regular 400
+$rf-fs-desc:              12px;   // Description 12px — Regular 400
+$rf-fs-h5:                13px;   // Small Header — Open Sans Bold 700
+
+$rf-light:                300;
+$rf-regular:              400;
+$rf-semibold:             600;
+$rf-bold:                 700;
+
+$rf-lh-body:              24px;   // Body line-height (Paragraph Workflow)
+
+
+// ----- Breakpoints ----------------------------------------------------------
+// Mobile-first. Design is full-width at desktop; must work down to 320px.
+$sm:                   480px;
+$md:                   768px;
+$lg:                   1024px;
+$xl:                   1280px;
+
+// ----- Layout dimensions from Figma ----------------------------------------
+$nav-rail-width:          63px;    // Outer left rail (logos + user)
+$nav-inner-width:         215px;   // Inner sidebar (search + mega-nav)
+$nav-total-width:         $nav-rail-width + $nav-inner-width;   // 278px
+$body-content-pad:        48px;    // Body inner padding from Figma
+
+// =============================================================================
+// CSS custom properties — same tokens exposed at :root so they can be used
+// inside CSS Modules without an @use import, and overridden by themes if you
+// want to extend the project.
+// =============================================================================
+:root {
+  --rf-brand-primary:       #{$rf-brand-primary};
+  --rf-brand-pink:          #{$rf-brand-pink};
+  --rf-brand-berry:         #{$rf-brand-berry};
+  --rf-brand-grape-3:       #{$rf-brand-grape-3};
+
+  --rf-color-surface:       #{$rf-color-surface};
+  --rf-color-border:        #{$rf-color-border};
+
+  --rf-color-text-header:   #{$rf-color-text-header};
+  --rf-color-text-body:     #{$rf-color-text-body};
+  --rf-color-text-g3:       #{$rf-color-text-g3};
+  --rf-color-text-g4:       #{$rf-color-text-g4};
+
+  --rf-button-on-primary:   #{$rf-button-on-primary};
+
+  --rf-font-family:         #{$rf-font};
+  --rf-font-family-h5:      #{$rf-font-h5};
+
+  --rf-fs-h1:               #{$rf-fs-h1};
+  --rf-fs-h2:               #{$rf-fs-h2};
+  --rf-fs-h3:               #{$rf-fs-h3};
+  --rf-fs-body-workflow:    #{$rf-fs-body-workflow};
+  --rf-fs-body-admin:       #{$rf-fs-body-admin};
+  --rf-fs-desc:             #{$rf-fs-desc};
+  --rf-fs-h5:               #{$rf-fs-h5};
+
+  --rf-fw-light:            #{$rf-light};
+  --rf-fw-regular:          #{$rf-regular};
+  --rf-fw-semibold:         #{$rf-semibold};
+  --rf-fw-bold:             #{$rf-bold};
+
+  --rf-lh-body-workflow:    #{$rf-lh-body};
+
+  --rf-nav-rail-width:      #{$nav-rail-width};
+  --rf-nav-inner-width:     #{$nav-inner-width};
+  --rf-nav-total-width:     #{$nav-total-width};
+  --rf-body-content-pad:    #{$body-content-pad};
+}

@@ -1,0 +1,92 @@
+@use 'variables' as *;
+
+.showcase {
+  border: 1px solid $rf-color-border;
+  border-radius: 8px;
+  overflow: hidden;
+  background: $rf-color-surface;
+  margin-bottom: 24px;
+}
+
+.head {
+  padding: 16px 20px 0;
+}
+
+.title {
+  font-size: $rf-fs-h5; // 13px
+  font-weight: $rf-bold;
+  color: $rf-color-text-header;
+}
+
+.desc {
+  margin-top: 4px;
+  font-size: $rf-fs-desc; // 12px
+  color: $rf-color-text-g4;
+  max-width: 64ch;
+}
+
+.canvas {
+  padding: 24px 20px;
+}
+
+.canvasFlush {
+  padding: 0;
+}
+
+/* ---------- Code window (dark, brand-tinted) ---------- */
+.codeWrap {
+  border-top: 1px solid $rf-color-border;
+  background: #1e1b32;
+}
+
+.codeBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.lang {
+  font: $rf-semibold 11px/1 $rf-font;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $rf-brand-grape-3; // grape 3
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.barBtn {
+  font: $rf-semibold 12px/1 $rf-font;
+  color: #cfc8ee;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $rf-brand-grape-3;
+    outline-offset: 2px;
+  }
+}
+
+.code {
+  margin: 0;
+  padding: 16px 18px;
+  overflow-x: auto;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #e7e3fb;
+  white-space: pre;
+}

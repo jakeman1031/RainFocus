@@ -1,0 +1,226 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// The nav is expanded above 992px and auto-collapses at/below it. The rf logo
+// toggles it; the inner column slides in/out at a steady (linear) pace.
+// NOTE: 992px also lives in Sidebar.jsx (matchMedia) — keep the two in sync.
+
+.sidebar {
+  display: flex;
+  flex-shrink: 0;
+  width: $nav-rail-width; // collapsed footprint by default (mobile-first)
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  background: $rf-color-surface;
+  transition: width 0.3s linear; // steady reflow on desktop
+}
+
+/* ---------- Outer rail (63px) ---------- */
+.rail {
+  position: relative;
+  z-index: 2; // sits above the sliding inner panel
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px; // space between the rf + summit logos at the top
+  flex-shrink: 0;
+  width: $nav-rail-width; // 63px
+  padding: 12px 0;
+  background: $rf-color-surface; // opaque, so the tucked panel is hidden behind it
+  border-right: 1px solid $rf-color-border;
+}
+
+.brandLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  padding: 8px 0 16px;
+  cursor: pointer;
+
+  img {
+    width: 32px;
+    height: auto;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $rf-brand-primary;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+.orgLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 8px;
+
+  img {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    object-fit: cover;
+  }
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: auto; // push to the bottom of the vertical rail
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: $rf-color-text-g3; // #444
+  color: $rf-color-surface;
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* ---------- Inner column (215px) — slides in/out via translateX ---------- */
+.inner {
+  position: absolute;
+  top: 0;
+  left: $nav-rail-width; // sits right after the rail
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: $nav-inner-width; // 215px
+  height: 100%;
+  padding: 12px 8px;
+  background: $rf-color-surface;
+  border-right: 1px solid $rf-color-border;
+  transform: translateX(-100%); // collapsed: tucked behind the rail
+  transition: transform 0.3s linear; // steady slide
+}
+
+/* User-forced states (toggled by the rf logo). */
+.open {
+  width: $nav-total-width; // reflow body on desktop
+}
+.open .inner {
+  transform: translateX(0);
+}
+
+.closed {
+  width: $nav-rail-width;
+}
+.closed .inner {
+  transform: translateX(-100%);
+}
+
+/* Desktop default (above 992px): expanded unless the user explicitly closed it. */
+@media (min-width: 993px) {
+  .sidebar:not(.closed) {
+    width: $nav-total-width;
+  }
+  .sidebar:not(.closed) .inner {
+    transform: translateX(0);
+  }
+}
+
+/* At/below 992px the slim left rail becomes a full-width top bar, as tall as
+   it was wide (63px). rf logo stays far left; the summit logo + avatar cluster
+   to the far right (summit then avatar). The nav drawer now opens/closes from
+   the far-left edge, sliding in below the bar and floating over the body. */
+@media (max-width: 992px) {
+  .sidebar,
+  .open,
+  .closed {
+    width: 100%;
+    height: $nav-rail-width; // 63px tall == its old width
+  }
+
+  .rail {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    width: 100%;
+    height: $nav-rail-width;
+    padding: 0 12px;
+    border-right: none;
+    border-bottom: 1px solid $rf-color-border;
+  }
+
+  // rf far left; the summit + avatar pair is pushed to the far right and kept
+  // together — summit first, avatar to its right.
+  .orgLogo {
+    margin-left: auto;
+  }
+  .avatar {
+    margin-top: 0; // reset the vertical-rail bottom push
+  }
+
+  // Drawer slides in from the far left, sitting just below the top bar.
+  .inner {
+    top: $nav-rail-width;
+    left: 0;
+    height: calc(100vh - #{$nav-rail-width});
+  }
+  .open .inner {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+}
+
+/* ---------- Inner column content ---------- */
+.eventHeader {
+  padding: 8px 8px 12px;
+}
+
+.eventTitle {
+  font-size: $rf-fs-body-admin; // 14px
+  font-weight: $rf-semibold;
+  color: $rf-color-text-header;
+  line-height: 1.3;
+}
+
+.eventDetails {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px 12px;
+  font-size: 10px;
+  font-weight: $rf-regular;
+  color: #000;
+}
+
+.separator {
+  color: $rf-color-text-g4;
+}
+
+.searchWrap {
+  padding: 0 8px 12px;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  background: #f5f5f5;
+  border-radius: 4px;
+
+  img {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 12px;
+    color: $rf-color-text-body;
+
+    &::placeholder {
+      color: #777;
+    }
+  }
+}

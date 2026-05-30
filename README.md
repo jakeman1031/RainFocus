@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RainFocus UI Challenge — Jake Arciniega
 
-## Getting Started
+A responsive implementation of the RainFocus Summit "Event setup guide" from the provided Figma design, plus a Storybook-style **Design System** reference page. Built with **Next.js (App Router)** and **SCSS** — no Tailwind, Bootstrap, or other CSS frameworks.
 
-First, run the development server:
+**Live sandbox:** <!-- paste your CodeSandbox / StackBlitz link here -->
+
+Pages:
+- `/` — Event setup guide (the design).
+- `/design-system` — design tokens, type scale, grid, and components.
+
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open <http://localhost:3000>.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## View the production build (no build step needed)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The delivered `build/` folder is a static export with `index.html` at its root.
 
-## Learn More
+- **Quickest:** open `build/index.html` directly in your browser. Asset paths are relativized during the build, so the page renders from `file://`.
+- **Full interactivity** (mobile nav toggle, the design-system Copy buttons): serve the folder over HTTP — module scripts don't execute from `file://`:
+  ```bash
+  npm run serve:build      # serves /build at http://localhost:4173
+  ```
+  …or just use the live sandbox link above.
 
-To learn more about Next.js, take a look at the following resources:
+To regenerate it yourself: `npm run build` (runs `next build` and a postbuild step that moves `out/ → build/` and relativizes asset paths).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Build & package for delivery
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run package
+```
 
-## Deploy on Vercel
+This builds, then writes two delivery artifacts **next to** the project folder:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `../jake-arciniega-rf-ui/` — clean copy of the whole project (source + `build/`, no `node_modules`).
+- `../jake-arciniega-rf-ui.zip` — the same, zipped.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Email the zip. Reviewers can unzip and open `jake-arciniega-rf-ui/build/index.html` to see the finished work without building.
+
+## Tech notes
+
+- **Framework:** Next.js 16, App Router, static export (`output: 'export'`).
+- **Styling:** SCSS via the `sass` package — CSS Modules (`*.module.scss`) per component plus `app/globals.scss`. Tokens live in `styles/_variables.scss` (exposed as SCSS variables and `--rf-*` CSS custom properties); a fractional flex grid lives in `styles/_grid.scss`.
+- **Fonts:** Inter via `next/font/google` (weights 300/400/600/700).
+- **Responsiveness:** Full-width at desktop, usable down to 320px. The sidebar becomes a top bar at ≤992px. Breakpoint mixins (`sm` 480 / `md` 768 / `lg` 1024 / `xl` 1280) live in `styles/_mixins.scss`.
+
+## Project layout
+
+```
+app/          App Router — layout, the two pages, globals.scss
+components/   One folder per UI block; each .jsx pairs with a .module.scss
+styles/       _variables / _grid / _mixins / _reset partials
+public/       Static assets exported from Figma (icons/, images/)
+scripts/      postbuild (out → build + relativize) and package (zip) helpers
+DESIGN.md     Design reference — Figma node map, tokens, responsive plan
+```
+
+See `DESIGN.md` for the full design reference.

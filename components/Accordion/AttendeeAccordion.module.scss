@@ -1,0 +1,35 @@
+@use 'variables' as *;
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.title {
+  font-size: $rf-fs-h3; // 20px
+  font-weight: $rf-semibold;
+  color: $rf-color-text-header;
+}
+
+/* Person Portal icon (single SVG, 35x35). */
+.personIcon {
+  flex-shrink: 0;
+  width: 35px;
+  height: 35px;
+}
+
+/* Step 1's three items share one bordered container (Figma 310:318). */
+.boxed {
+  padding: 16px 24px;
+  background: $rf-color-surface;
+  border: 1px solid $rf-color-border;
+  border-radius: 4px;
+}

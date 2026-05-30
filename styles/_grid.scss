@@ -1,0 +1,71 @@
+// =============================================================================
+// _grid.scss — fractional flex grid
+//
+// 12-column, Bootstrap-style thinking, but each column is named by the FRACTION
+// of the row it fills: `col-{N}-{D}` means "N of D" (the dash = "of").
+//
+//   col-1-1  = 100%       col-1-2  = 50%        col-2-3  = 66.66%
+//   col-1-3  = 33.33%     col-1-4  = 25%        col-3-4  = 75%
+//   col-1-6  = 16.66%     col-1-12 = 8.33%      col-5-12 = 41.66%
+//
+// Columns live in a `.row` (flexbox, wraps). Gutters come from each column's
+// horizontal padding, offset by the row's negative margin so edges stay flush.
+//
+// These are GLOBAL utility classes (this partial is @used by globals.scss), so
+// apply them in JSX as plain strings — not via the styles object:
+//
+//   <div className="row">
+//     <div className="col-1-3">…</div>
+//     <div className="col-1-3">…</div>
+//     <div className="col-1-3">…</div>
+//   </div>
+//
+// To combine with a CSS-module class:
+//   <div className={`${styles.card} col-1-3`}>…</div>
+//
+// Behavior:
+//  - Columns WRAP automatically when their fractions exceed 100%
+//    (e.g. three col-1-2 → two on row one, the third wraps below).
+//  - Below the $md breakpoint every column stacks to full width.
+// =============================================================================
+
+@use 'sass:math';
+@use 'variables' as *;
+
+$grid-gutter:  24px !default;
+$grid-columns: 12 !default;
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 math.div($grid-gutter, -2); // pull edges out so columns sit flush
+  row-gap: 15px; // vertical gutter only when columns wrap / stack (e.g. mobile)
+}
+
+// Shared column behavior. The attribute selector matches every `col-*` class.
+// Default is full width; the generated fraction classes below override it.
+[class*='col-'] {
+  box-sizing: border-box;
+  padding: 0 math.div($grid-gutter, 2); // horizontal gutter; row's negative margin keeps edges flush
+  flex: 0 0 100%; // grow:0 shrink:0 — a column takes exactly its fraction
+  max-width: 100%;
+}
+
+// Generate every N/D fraction for D = 1..$grid-columns, N = 1..D.
+@for $d from 1 through $grid-columns {
+  @for $n from 1 through $d {
+    .col-#{$n}-#{$d} {
+      $w: math.percentage(math.div($n, $d));
+      flex-basis: $w;
+      max-width: $w;
+    }
+  }
+}
+
+// Stack everything below the medium breakpoint.
+@media (max-width: $md) {
+  [class*='col-'] {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+}

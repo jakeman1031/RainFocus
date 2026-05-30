@@ -1,0 +1,28 @@
+// Breakpoint mixins (mobile-first).
+//
+// Usage:
+//   @use 'mixins' as *;
+//   .card { padding: 12px; @include md { padding: 16px; } @include lg { padding: 24px; } }
+//
+// Design must work down to 320px (smallest mobile per the RainFocus brief),
+// so write the base rules for ~320–479px first and layer larger styles on top.
+
+@use 'variables' as *;
+
+@mixin sm  { @media (min-width: $sm)  { @content; } }   // ≥480
+@mixin md  { @media (min-width: $md)  { @content; } }   // ≥768
+@mixin lg  { @media (min-width: $lg)  { @content; } }   // ≥1024
+@mixin xl  { @media (min-width: $xl)  { @content; } }   // ≥1280
+
+// Visually-hidden but available to screen readers — useful for icon-only buttons.
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
