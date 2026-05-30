@@ -3,7 +3,7 @@ import Sidebar from '@/components/Sidebar/Sidebar';
 import StyleGuide from '@/components/StyleGuide/StyleGuide';
 
 export const metadata = {
-  title: 'Design System · RainFocus Summit — Claude',
+  title: 'Design System · RainFocus Summit — Jake Arciniega',
   description: 'Design system reference — tokens, type scale, grid, and components.',
 };
 

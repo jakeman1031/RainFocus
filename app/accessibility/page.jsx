@@ -3,7 +3,7 @@ import Sidebar from '@/components/Sidebar/Sidebar';
 import Accessibility from '@/components/Accessibility/Accessibility';
 
 export const metadata = {
-  title: 'Accessibility · RainFocus Summit — Claude',
+  title: 'Accessibility · RainFocus Summit — Jake Arciniega',
   description: 'Accessibility report — score and audit checklist.',
 };
 
